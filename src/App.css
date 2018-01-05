@@ -36,9 +36,9 @@
 
   position: absolute;
   z-index: 1;
-  top: 50%;
-  left: 50%;
-  margin: -140px 0 0 -220px;
+  /*top: 50%;*/
+  /*left: 50%;*/
+  /*margin: -140px 0 0 -220px;*/
 
   border: 1px solid #ccc;
   background: white;
