@@ -2,6 +2,10 @@
   "name": "react-modal-resizable-draggable",
   "version": "0.0.5",
   "description": "This is a modal that support resizalbe and draggable function",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wwan5803/react-modal-resizable-draggable.git"
+  },
   "main": "build/index.js",
   "peerDependencies": {
     "react": "^15.5.4"
