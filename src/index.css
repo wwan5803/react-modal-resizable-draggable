@@ -2,28 +2,8 @@
   padding: 20px;
   position: absolute;
   z-index: 1;
-  /*top: 50%;*/
-  /*left: 50%;*/
-  /*margin: -140px 0 0 -220px;*/
-
   border: 1px solid #ccc;
   background: white;
-}
-
-button {
-  display: block;
-  margin: 0 auto;
-  padding: 6px 12px;
-
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: white;
-
-  color: #0066cc;
-  font-weight: bold;
-
-  font-size: 14px;
-  line-height: 20px;
 }
 
 /* Animation */
