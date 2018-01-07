@@ -32,7 +32,7 @@ class Modal extends Component {
     render() {
         const { disableDrag, isDragging, width, height, top, left, isOpen } = this.props;
         if (isOpen) {
-            if(disableDrag){
+            if(!!disableDrag){
                 return (
                     <div
                         ref={node=>{this.node=node}}
