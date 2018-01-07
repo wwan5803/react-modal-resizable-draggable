@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./index.css";
 
 class Resizer extends React.Component {
   constructor(props) {
