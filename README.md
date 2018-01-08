@@ -2,6 +2,8 @@
 
 Accessible modal dialog component for React.JS
 
+# Demo
+* [link to demo](https://wwan5803.github.io/react-modal-resizable-draggable/)
 
 ## Table of Contents
 
