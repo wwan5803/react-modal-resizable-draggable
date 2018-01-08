@@ -75,8 +75,8 @@ class FlexibleModal extends Component {
             isResizing: false,
             top: window.innerHeight/2 - this.props.initHeight/2 - 50,
             left: window.innerWidth/2 - this.props.initWidth/2 - 21,
-            width: 400,
-            height: 250
+            width: this.props.initWidth,
+            height: this.props.initHeight
         };
         this.updateStateResizing = this.updateStateResizing.bind(this);
         this.funcResizing = this.funcResizing.bind(this);
@@ -109,7 +109,7 @@ class FlexibleModal extends Component {
     }
 
     render() {
-        const {isOpen, onRequestClose, initWidth, initHeight, disableResize, disableDrag} = this.props;
+        const {isOpen, onRequestClose, disableResize, disableDrag} = this.props;
         return (
             <div
                 className="App"
@@ -121,8 +121,8 @@ class FlexibleModal extends Component {
                 {isOpen && <div onClick={onRequestClose} className="mask" />}
                 <Modal
                     disableDrag={disableDrag}
-                    width={initWidth}
-                    height={initHeight}
+                    width={this.state.width}
+                    height={this.state.height}
                     top={this.state.top}
                     left={this.state.left}
                     isDragging={this.state.isDragging}
