@@ -14,18 +14,18 @@ class Resizer extends React.Component {
     window.removeEventListener("mouseup", this.onMouseUp.bind(this), false);
   }
   onMouseDown(e) {
-    console.log("Resizer.onMouseDown");
+    // console.log("Resizer.onMouseDown");
 
     this.props.updateStateResizing(true);
   }
   onMouseMove(e) {
-    console.log("Resizer.onMouseMove");
+    // console.log("Resizer.onMouseMove");
     if (this.props.isResizing) {
       this.props.funcResizing(e.clientX, e.clientY);
     }
   }
   onMouseUp(e) {
-    console.log("Resizer.onMouseUp");
+    // console.log("Resizer.onMouseUp");
     if (this.props.isResizing) {
       this.props.updateStateResizing(false);
     }

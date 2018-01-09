@@ -88,14 +88,24 @@ class FlexibleModal extends Component {
 
     funcResizing(clientX, clientY) {
         let node = ReactDOM.findDOMNode(this.node_modal);
-        this.setState({
-            width: clientX - node.offsetLeft + 16 / 2,
-            height: clientY - node.offsetTop + 16 / 2
-        });
+        let minWidth = this.props.minWidth ? this.props.minWidth : 0;
+        let minHeight = this.props.minHeight ? this.props.minHeight : 0;
+        if(clientX > node.offsetLeft + minWidth){
+            this.setState({
+                width: clientX - node.offsetLeft + 16 / 2
+            });
+        }
+        if(clientY > node.offsetTop + minHeight){
+            this.setState({
+                height: clientY - node.offsetTop + 16 / 2
+            });
+        }
     }
 
     onDragOver(e) {
-        e.preventDefault();
+        if(!this.props.disableDrag){
+            e.preventDefault();
+        }
         return false;
     }
     onDrop(e) {
