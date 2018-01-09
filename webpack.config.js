@@ -1,3 +1,5 @@
+const webpack = require("webpack");
+
 var path = require('path');
 module.exports = {
     entry: './src/index.js',
@@ -27,5 +29,21 @@ module.exports = {
     },
     externals: {
         'react': 'commonjs react' // this line is just to use the React dependency of our parent-testing-project instead of using our own React.
-    }
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                comparisons: false,
+                // Drop console statements
+                drop_console: true
+            },
+            output: {
+                comments: false,
+                ascii_only: true
+            },
+            sourceMap: true
+        })
+    ]
+
 };
