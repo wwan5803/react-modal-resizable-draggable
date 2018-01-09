@@ -73,10 +73,10 @@ class FlexibleModal extends Component {
         this.state = {
             isDragging: false,
             isResizing: false,
-            top: window.innerHeight/2 - this.props.initHeight/2 - 50,
-            left: window.innerWidth/2 - this.props.initWidth/2 - 21,
-            width: this.props.initWidth,
-            height: this.props.initHeight
+            top: this.props.top !== undefined ? this.props.top : this.props.initHeight ? window.innerHeight/2 - this.props.initHeight/2 - 50 : window.innerHeight/2 - 400/2 - 50,
+            left: this.props.left !== undefined ? this.props.left : this.props.initWidth ? window.innerWidth/2 - this.props.initWidth/2 - 21 : window.innerWidth/2 - 800/2 - 21,
+            width: this.props.initWidth ? this.props.initWidth : 800,
+            height: this.props.initHeight ? this.props.initHeight : 400
         };
         this.updateStateResizing = this.updateStateResizing.bind(this);
         this.funcResizing = this.funcResizing.bind(this);
