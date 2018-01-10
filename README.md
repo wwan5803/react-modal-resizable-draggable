@@ -57,6 +57,18 @@ The Modal object has one required prop:
 
 - `isOpen` to render its children.
 
+Optional prop:
+
+- `minWidth` The minimum width of the modal(default 0).
+- `minHeight` The minimum height of the modal(default 0).
+- `initWidth` The initial width of the modal(default 800).
+- `initHeight` The initial width of the modal(default 400).
+- `top` The position of the modal.
+- `left` The position of the modal.
+- `onRequestClose` to close the modal.
+- `disableDrag` to disable the drag function(default false).
+- `disableResize` to disable the resize function(default false).
+
 Example:
 
 ```jsx
