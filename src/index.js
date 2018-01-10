@@ -87,15 +87,16 @@ class FlexibleModal extends Component {
     }
 
     funcResizing(clientX, clientY) {
+        const {minWidth:mWidth, minHeight:mHeight, disableVerticalResize, disableHorizontalResize} = this.props;
         let node = ReactDOM.findDOMNode(this.node_modal);
-        let minWidth = this.props.minWidth ? this.props.minWidth : 0;
-        let minHeight = this.props.minHeight ? this.props.minHeight : 0;
-        if(clientX > node.offsetLeft + minWidth){
+        let minWidth = mWidth ? mWidth : 0;
+        let minHeight = mHeight ? mHeight : 0;
+        if(!disableHorizontalResize && clientX > node.offsetLeft + minWidth){
             this.setState({
                 width: clientX - node.offsetLeft + 16 / 2
             });
         }
-        if(clientY > node.offsetTop + minHeight){
+        if(!disableVerticalResize && clientY > node.offsetTop + minHeight){
             this.setState({
                 height: clientY - node.offsetTop + 16 / 2
             });
@@ -110,7 +111,13 @@ class FlexibleModal extends Component {
     }
     onDrop(e) {
         var obj = JSON.parse(e.dataTransfer.getData("application/json"));
-        this.setState({isDragging: false, top: e.clientY - obj.y, left: e.clientX - obj.x});
+        this.setState({isDragging: false});
+        if(!this.props.disableVerticalDrop){
+            this.setState({top: e.clientY - obj.y});
+        }
+        if(!this.props.disableHorizontalDrop){
+            this.setState({left: e.clientX - obj.x});
+        }
         e.preventDefault();
     }
 

@@ -68,6 +68,11 @@ Optional prop:
 - `onRequestClose` to close the modal.
 - `disableDrag` to disable the drag function(default false).
 - `disableResize` to disable the resize function(default false).
+- `disableVerticalResize` to disable the vertical resize function(default false).
+- `disableHorizontalResize` to disable the horizontal resize function(default false).
+- `disableVerticalDrop` to disable the vertical drop function(default false).
+- `disableHorizontalDrop` to disable the horizontal drop function(default false).
+
 
 Example:
 
