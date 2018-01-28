@@ -51,6 +51,14 @@ Add following css style to your css file
   border-bottom: solid 2px #333;
   border-right: solid 2px #333;
 }
+.drag-area{
+  background: rgba(22, 22, 333, 0.2);
+  height: 50px;
+  position:absolute;
+  right:0;
+  top:0;
+  cursor:move;
+}
 ```
 
 The Modal object has one required prop:
