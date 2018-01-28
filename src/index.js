@@ -109,11 +109,26 @@ class FlexibleModal extends Component {
   }
 
   onMouseMove(e) {
+    const {disableMove, disableVerticalMove, disableHorizontalMove} = this.props;
     if (this.state.isDragging) {
-      this.setState({
-        left: e.pageX - this.state.rel.x,
-        top: e.pageY - this.state.rel.y
-      });
+      if(disableMove){
+
+      }else if(disableVerticalMove && disableHorizontalMove){
+
+      }else if(!disableVerticalMove && disableHorizontalMove){
+          this.setState({
+              top: e.pageY - this.state.rel.y
+          });
+      }else if(disableVerticalMove && !disableHorizontalMove){
+          this.setState({
+              left: e.pageX - this.state.rel.x
+          });
+      }else if(!disableVerticalMove && !disableHorizontalMove){
+          this.setState({
+              left: e.pageX - this.state.rel.x,
+              top: e.pageY - this.state.rel.y
+          });
+      }
     } else if (this.state.isResizing) {
       this.funcResizing(e.clientX, e.clientY);
     } else {
