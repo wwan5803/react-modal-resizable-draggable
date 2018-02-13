@@ -5,6 +5,16 @@ Accessible modal dialog component for React.JS
 # Demo
 * [link to demo](https://wwan5803.github.io/react-modal-resizable-draggable/)
 
+# Keyboard feature support
+* arrowLeft: move left 20px
+* arrowRight: move right 20px
+* arrowUp: move up 20px
+* arrowDown: move down 20px
+* ctrl + arrowLeft: decrease width 20px
+* ctrl + arrowRight: increase width 20px
+* ctrl + arrowUp: increase height 20px
+* ctrl + arrowDown: decrease height 20px
+
 ## Table of Contents
 
 * [Installation](#installation)

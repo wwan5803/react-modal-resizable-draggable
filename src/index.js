@@ -76,6 +76,7 @@ class FlexibleModal extends Component {
   componentDidMount(){
       document.addEventListener("mousemove", this.onMouseMove.bind(this));
       document.addEventListener("mouseup", this.onMouseUp.bind(this));
+      document.addEventListener("keydown", this.pressKey.bind(this));
   }
 
   componentDidUpdate(props, state) {
@@ -150,8 +151,8 @@ class FlexibleModal extends Component {
       disableHorizontalResize
     } = this.props;
     let node = ReactDOM.findDOMNode(this.node_modal);
-    let minWidth = mWidth ? mWidth : 0;
-    let minHeight = mHeight ? mHeight : 0;
+    let minWidth = mWidth ? mWidth : 200;
+    let minHeight = mHeight ? mHeight : 100;
     if (!disableHorizontalResize && clientX > node.offsetLeft + minWidth) {
       this.setState({
         width: clientX - node.offsetLeft + 16 / 2
@@ -168,10 +169,49 @@ class FlexibleModal extends Component {
     this.setState({ isDragging });
   }
 
+  pressKey(e){
+    const {onRequestClose} = this.props;
+    if(e.ctrlKey){
+        switch(e.keyCode) {
+            case 37:
+                this.setState((prevState)=>({width: prevState.width - 20}))
+                break
+            case 38:
+                this.setState((prevState)=>({height: prevState.height - 20}))
+                break
+            case 39:
+                this.setState((prevState)=>({width: prevState.width + 20}))
+                break
+            case 40:
+                this.setState((prevState)=>({height: prevState.height + 20}))
+                break
+        }
+    }else{
+        switch(e.keyCode) {
+            case 27:
+                onRequestClose()
+                break
+            case 37:
+                this.setState((prevState)=>({left: prevState.left - 20}))
+                break
+            case 38:
+                this.setState((prevState)=>({top: prevState.top - 20}))
+                break
+            case 39:
+                this.setState((prevState)=>({left: prevState.left + 20}))
+                break
+            case 40:
+                this.setState((prevState)=>({top: prevState.top + 20}))
+                break
+        }
+    }
+
+  }
+
   render() {
     const { isOpen, onRequestClose, disableResize, disableDrag } = this.props;
     return (
-      <div className="App">
+      <div>
         {/*this mask is a must*/}
         {isOpen && <div onClick={onRequestClose} className="mask" />}
         <Modal
