@@ -6,7 +6,6 @@ import Resizer from "./Resize.js";
 class Modal extends Component {
   render() {
     const {
-      disableDrag,
       isDragging,
       width,
       height,
@@ -15,19 +14,6 @@ class Modal extends Component {
       isOpen
     } = this.props;
     if (isOpen) {
-      if (!!disableDrag) {
-        return (
-          <div
-            ref={node => {
-              this.node = node;
-            }}
-            className="modal"
-            style={{ width, height, top, left }}
-          >
-            {this.props.children}
-          </div>
-        );
-      } else {
         return (
           <div
             ref={node => {
@@ -40,7 +26,6 @@ class Modal extends Component {
             {this.props.children}
           </div>
         );
-      }
     } else {
       return null;
     }
@@ -170,20 +155,20 @@ class FlexibleModal extends Component {
   }
 
   pressKey(e){
-    const {onRequestClose} = this.props;
+    const {onRequestClose, disableResize, disableMove, disableVerticalMove, disableHorizontalMove} = this.props;
     if(e.ctrlKey){
         switch(e.keyCode) {
             case 37:
-                this.setState((prevState)=>({width: prevState.width - 20}))
+                !disableResize && this.setState((prevState)=>({width: prevState.width - 20}))
                 break
             case 38:
-                this.setState((prevState)=>({height: prevState.height - 20}))
+                !disableResize && this.setState((prevState)=>({height: prevState.height - 20}))
                 break
             case 39:
-                this.setState((prevState)=>({width: prevState.width + 20}))
+                !disableResize && this.setState((prevState)=>({width: prevState.width + 20}))
                 break
             case 40:
-                this.setState((prevState)=>({height: prevState.height + 20}))
+                !disableResize && this.setState((prevState)=>({height: prevState.height + 20}))
                 break
         }
     }else{
@@ -192,16 +177,16 @@ class FlexibleModal extends Component {
                 onRequestClose()
                 break
             case 37:
-                this.setState((prevState)=>({left: prevState.left - 20}))
+                !disableMove && !disableHorizontalMove && this.setState((prevState)=>({left: prevState.left - 20}))
                 break
             case 38:
-                this.setState((prevState)=>({top: prevState.top - 20}))
+                !disableMove && !disableVerticalMove && this.setState((prevState)=>({top: prevState.top - 20}))
                 break
             case 39:
-                this.setState((prevState)=>({left: prevState.left + 20}))
+                !disableMove && !disableHorizontalMove && this.setState((prevState)=>({left: prevState.left + 20}))
                 break
             case 40:
-                this.setState((prevState)=>({top: prevState.top + 20}))
+                !disableMove && !disableVerticalMove && this.setState((prevState)=>({top: prevState.top + 20}))
                 break
         }
     }
@@ -209,13 +194,12 @@ class FlexibleModal extends Component {
   }
 
   render() {
-    const { isOpen, onRequestClose, disableResize, disableDrag } = this.props;
+    const { isOpen, onRequestClose, disableResize } = this.props;
     return (
       <div>
         {/*this mask is a must*/}
         {isOpen && <div onClick={onRequestClose} className="mask" />}
         <Modal
-          disableDrag={disableDrag}
           width={this.state.width}
           height={this.state.height}
           top={this.state.top}
