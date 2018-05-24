@@ -20,7 +20,7 @@ class Modal extends Component {
               this.node = node;
             }}
             draggable={isDragging}
-            className="modal"
+            className="flexible-modal"
             style={{ width, height, top, left }}
           >
             {this.props.children}
@@ -198,7 +198,7 @@ class FlexibleModal extends Component {
     return (
       <div>
         {/*this mask is a must*/}
-        {isOpen && <div onClick={onRequestClose} className="mask" />}
+        {isOpen && <div onClick={onRequestClose} className="flexible-modal-mask" />}
         <Modal
           width={this.state.width}
           height={this.state.height}
@@ -215,7 +215,7 @@ class FlexibleModal extends Component {
           {this.props.children}
           <div
             onMouseDown={this.onMouseDown.bind(this)}
-            className="drag-area"
+            className="flexible-modal-drag-area"
             style={{
               width: this.state.width,
             }}

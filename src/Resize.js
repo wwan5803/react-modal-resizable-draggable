@@ -15,7 +15,7 @@ class Resizer extends React.Component {
     };
     return (
       <div
-        className="resizer"
+        className="flexible-modal-resizer"
         style={style}
         onMouseDown={this.onMouseDown.bind(this)}
       />

@@ -36,14 +36,13 @@ To install, you can use [npm](https://npmjs.org/) or [yarn](https://yarnpkg.com)
 ## Usage
 Add following css style to your css file
 ```css
-.modal {
-  padding: 20px;
+.flexible-modal {
   position: absolute;
   z-index: 1;
   border: 1px solid #ccc;
   background: white;
 }
-.mask {
+.flexible-modal-mask {
   position: fixed;
   height: 100%;
   background: rgba(55, 55, 55, 0.6);
@@ -52,7 +51,7 @@ Add following css style to your css file
   right:0;
   bottom:0;
 }
-.resizer {
+.flexible-modal-resizer {
   position:absolute;
   right:0;
   bottom:0;
@@ -61,7 +60,7 @@ Add following css style to your css file
   border-bottom: solid 2px #333;
   border-right: solid 2px #333;
 }
-.drag-area{
+.flexible-modal-drag-area{
   background: rgba(22, 22, 333, 0.2);
   height: 50px;
   position:absolute;

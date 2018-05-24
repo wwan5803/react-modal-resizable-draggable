@@ -1,7 +1,7 @@
 const webpack = require("webpack");
-
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 var path = require('path');
-module.exports = {
+var devOption = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -33,10 +33,7 @@ module.exports = {
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
             compress: {
-                warnings: false,
                 comparisons: false
-                // Drop console statements
-                // drop_console: true
             },
             output: {
                 comments: false,
@@ -46,4 +43,61 @@ module.exports = {
         })
     ]
 
+}
+
+var productOption = {
+    entry: './src/index.js',
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        chunkFilename: '[name].[chunkhash:8].js',
+        filename: '[name].[chunkhash:8].js',
+        libraryTarget: 'commonjs2'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                include: path.resolve(__dirname, 'src'),
+                exclude: /(node_modules|bower_components|build)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env']
+                    }
+                }
+            },
+            {
+                test: /\.css$/,
+                use: [ 'css-loader' ]
+            }
+        ]
+    },
+    externals: {
+        'react': 'commonjs react' // this line is just to use the React dependency of our parent-testing-project instead of using our own React.
+    },
+    plugins: [
+        new CleanWebpackPlugin([path.resolve(__dirname, 'build')]),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                comparisons: false,
+                drop_console: true
+            },
+            output: {
+                comments: false,
+                ascii_only: true
+            }
+        })
+    ]
+
+}
+
+
+module.exports = (env) => {
+    console.log('env', env)
+    if(env==='production'){
+        return productOption
+    }else{
+        return devOption
+    }
 };
