@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Resizer from "./Resize.js";
+import * as FontAwesome from 'react-icons/lib/fa'
 
 class Modal extends Component {
   render() {
@@ -11,9 +12,12 @@ class Modal extends Component {
       height,
       top,
       left,
-      isOpen
+      isOpen,
+      isMinimised,
+      onRequestRecover
     } = this.props;
     if (isOpen) {
+      if (!isMinimised) {
         return (
           <div
             ref={node => {
@@ -26,6 +30,9 @@ class Modal extends Component {
             {this.props.children}
           </div>
         );
+      } else {
+        return <button style={{position: 'absolute', zIndex: 1000}} onClick={onRequestRecover}><FontAwesome.FaBars /></button>;
+      }
     } else {
       return null;
     }
@@ -58,10 +65,10 @@ class FlexibleModal extends Component {
     this.funcResizing = this.funcResizing.bind(this);
   }
 
-  componentDidMount(){
-      document.addEventListener("mousemove", this.onMouseMove.bind(this));
-      document.addEventListener("mouseup", this.onMouseUp.bind(this));
-      document.addEventListener("keydown", this.pressKey.bind(this));
+  componentDidMount() {
+    document.addEventListener("mousemove", this.onMouseMove.bind(this));
+    document.addEventListener("mouseup", this.onMouseUp.bind(this));
+    document.addEventListener("keydown", this.pressKey.bind(this));
   }
 
   componentDidUpdate(props, state) {
@@ -95,25 +102,27 @@ class FlexibleModal extends Component {
   }
 
   onMouseMove(e) {
-    const {disableMove, disableVerticalMove, disableHorizontalMove} = this.props;
+    const {
+      disableMove,
+      disableVerticalMove,
+      disableHorizontalMove
+    } = this.props;
     if (this.state.isDragging) {
-      if(disableMove){
-
-      }else if(disableVerticalMove && disableHorizontalMove){
-
-      }else if(!disableVerticalMove && disableHorizontalMove){
-          this.setState({
-              top: e.pageY - this.state.rel.y
-          });
-      }else if(disableVerticalMove && !disableHorizontalMove){
-          this.setState({
-              left: e.pageX - this.state.rel.x
-          });
-      }else if(!disableVerticalMove && !disableHorizontalMove){
-          this.setState({
-              left: e.pageX - this.state.rel.x,
-              top: e.pageY - this.state.rel.y
-          });
+      if (disableMove) {
+      } else if (disableVerticalMove && disableHorizontalMove) {
+      } else if (!disableVerticalMove && disableHorizontalMove) {
+        this.setState({
+          top: e.pageY - this.state.rel.y
+        });
+      } else if (disableVerticalMove && !disableHorizontalMove) {
+        this.setState({
+          left: e.pageX - this.state.rel.x
+        });
+      } else if (!disableVerticalMove && !disableHorizontalMove) {
+        this.setState({
+          left: e.pageX - this.state.rel.x,
+          top: e.pageY - this.state.rel.y
+        });
       }
     } else if (this.state.isResizing) {
       this.funcResizing(e.clientX, e.clientY);
@@ -154,57 +163,85 @@ class FlexibleModal extends Component {
     this.setState({ isDragging });
   }
 
-  pressKey(e){
-    const {onRequestClose, disableResize, disableMove, disableVerticalMove, disableHorizontalMove} = this.props;
-    if(e.ctrlKey){
-        switch(e.keyCode) {
-            case 37:
-                !disableResize && this.setState((prevState)=>({width: prevState.width - 20}))
-                break
-            case 38:
-                !disableResize && this.setState((prevState)=>({height: prevState.height - 20}))
-                break
-            case 39:
-                !disableResize && this.setState((prevState)=>({width: prevState.width + 20}))
-                break
-            case 40:
-                !disableResize && this.setState((prevState)=>({height: prevState.height + 20}))
-                break
-        }
-    }else{
-        switch(e.keyCode) {
-            case 27:
-                onRequestClose()
-                break
-            case 37:
-                !disableMove && !disableHorizontalMove && this.setState((prevState)=>({left: prevState.left - 20}))
-                break
-            case 38:
-                !disableMove && !disableVerticalMove && this.setState((prevState)=>({top: prevState.top - 20}))
-                break
-            case 39:
-                !disableMove && !disableHorizontalMove && this.setState((prevState)=>({left: prevState.left + 20}))
-                break
-            case 40:
-                !disableMove && !disableVerticalMove && this.setState((prevState)=>({top: prevState.top + 20}))
-                break
-        }
+  pressKey(e) {
+    const {
+      onRequestClose,
+      disableResize,
+      disableMove,
+      disableVerticalMove,
+      disableHorizontalMove
+    } = this.props;
+    if (e.ctrlKey) {
+      switch (e.keyCode) {
+        case 37:
+          !disableResize &&
+            this.setState(prevState => ({ width: prevState.width - 20 }));
+          break;
+        case 38:
+          !disableResize &&
+            this.setState(prevState => ({ height: prevState.height - 20 }));
+          break;
+        case 39:
+          !disableResize &&
+            this.setState(prevState => ({ width: prevState.width + 20 }));
+          break;
+        case 40:
+          !disableResize &&
+            this.setState(prevState => ({ height: prevState.height + 20 }));
+          break;
+      }
+    } else {
+      switch (e.keyCode) {
+        case 27:
+          onRequestClose();
+          break;
+        case 37:
+          !disableMove &&
+            !disableHorizontalMove &&
+            this.setState(prevState => ({ left: prevState.left - 20 }));
+          break;
+        case 38:
+          !disableMove &&
+            !disableVerticalMove &&
+            this.setState(prevState => ({ top: prevState.top - 20 }));
+          break;
+        case 39:
+          !disableMove &&
+            !disableHorizontalMove &&
+            this.setState(prevState => ({ left: prevState.left + 20 }));
+          break;
+        case 40:
+          !disableMove &&
+            !disableVerticalMove &&
+            this.setState(prevState => ({ top: prevState.top + 20 }));
+          break;
+      }
     }
-
   }
 
   render() {
-    const { isOpen, onRequestClose, disableResize } = this.props;
+    const {
+      isOpen,
+      isMinimised,
+      onRequestClose,
+      onRequestMinimise,
+      onRequestRecover,
+      disableResize
+    } = this.props;
     return (
       <div>
         {/*this mask is a must*/}
-        {isOpen && <div onClick={onRequestClose} className="flexible-modal-mask" />}
+        {isOpen &&
+          !isMinimised &&
+          <div onClick={onRequestMinimise} className="flexible-modal-mask" />}
         <Modal
           width={this.state.width}
           height={this.state.height}
           top={this.state.top}
           left={this.state.left}
           isDragging={this.state.isDragging}
+          onRequestRecover={onRequestRecover}
+          isMinimised={isMinimised}
           isOpen={isOpen}
           updateStateDragging={this.updateStateDragging.bind(this)}
           transitionName="modal-anim"
@@ -217,16 +254,24 @@ class FlexibleModal extends Component {
             onMouseDown={this.onMouseDown.bind(this)}
             className="flexible-modal-drag-area"
             style={{
-              width: this.state.width,
+              width: this.state.width
             }}
             ref={dragArea => {
               this.dragArea = dragArea;
             }}
           />
+            <div
+                onMouseDown={this.onMouseDown.bind(this)}
+                className="drag-area-2"
+                style={{
+                    width: this.state.width
+                }}
+                ref={dragArea => {
+                    this.dragArea2 = dragArea;
+                }}
+            />
           {!disableResize &&
-            <Resizer
-              updateStateResizing={this.updateStateResizing}
-            />}
+            <Resizer updateStateResizing={this.updateStateResizing} />}
         </Modal>
       </div>
     );

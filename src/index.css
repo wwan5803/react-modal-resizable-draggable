@@ -57,3 +57,12 @@
   top:0;
   cursor:move;
 }
+
+.drag-area-2{
+    background: rgba(22, 22, 333, 0.2);
+    height: 50px;
+    position:absolute;
+    right:0;
+    top:100px;
+    cursor:move;
+}
