@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Resizer from "./Resize.js";
-import * as FontAwesome from 'react-icons/lib/fa'
+import * as FontAwesome from "react-icons/lib/fa";
 
 class Modal extends Component {
   render() {
@@ -17,22 +17,47 @@ class Modal extends Component {
       onRequestRecover
     } = this.props;
     if (isOpen) {
-      if (!isMinimised) {
-        return (
+      // if (!isMinimised) {
+      //   return (
+      //     <div
+      //       ref={node => {
+      //         this.node = node;
+      //       }}
+      //       draggable={isDragging}
+      //       className="flexible-modal"
+      //       style={{ width, height, top, left }}
+      //     >
+      //       {this.props.children}
+      //     </div>
+      //   );
+      // } else {
+      //   return <button className="flexible-modal-rebound-btn" onClick={onRequestRecover}><FontAwesome.FaBars /></button>;
+      // }
+
+      return (
+        <div>
           <div
             ref={node => {
               this.node = node;
             }}
             draggable={isDragging}
-            className="flexible-modal"
+            className={isMinimised ? "flexible-modal-hidden" : "flexible-modal"}
             style={{ width, height, top, left }}
           >
             {this.props.children}
           </div>
-        );
-      } else {
-        return <button style={{position: 'absolute', zIndex: 1000}} onClick={onRequestRecover}><FontAwesome.FaBars /></button>;
-      }
+          <button
+            className={
+              isMinimised
+                ? "flexible-modal-rebound-btn"
+                : "flexible-modal-rebound-btn-hidden"
+            }
+            onClick={onRequestRecover}
+          >
+            <FontAwesome.FaBars />
+          </button>
+        </div>
+      );
     } else {
       return null;
     }
@@ -233,7 +258,10 @@ class FlexibleModal extends Component {
         {/*this mask is a must*/}
         {isOpen &&
           !isMinimised &&
-          <div onClick={onRequestMinimise} className="flexible-modal-mask" />}
+          <div
+            onClick={onRequestMinimise ? onRequestMinimise : onRequestClose}
+            className="flexible-modal-mask"
+          />}
         <Modal
           width={this.state.width}
           height={this.state.height}
@@ -250,46 +278,46 @@ class FlexibleModal extends Component {
           }}
         >
           {this.props.children}
-            <div
-                onMouseDown={this.onMouseDown.bind(this)}
-                className="flexible-modal-drag-area"
-                style={{
-                    width: this.state.width,
-                }}
-                ref={dragArea => {
-                    this.dragArea = dragArea;
-                }}
-            />
-            <div
-                onMouseDown={this.onMouseDown.bind(this)}
-                className="flexible-modal-drag-area-left"
-                style={{
-                    height: this.state.height,
-                }}
-                ref={dragArea => {
-                    this.dragArea2 = dragArea;
-                }}
-            />
-            <div
-                onMouseDown={this.onMouseDown.bind(this)}
-                className="flexible-modal-drag-area-bottom"
-                style={{
-                    width: this.state.width,
-                }}
-                ref={dragArea => {
-                    this.dragArea3 = dragArea;
-                }}
-            />
-            <div
-                onMouseDown={this.onMouseDown.bind(this)}
-                className="flexible-modal-drag-area-right"
-                style={{
-                    height: this.state.height,
-                }}
-                ref={dragArea => {
-                    this.dragArea4 = dragArea;
-                }}
-            />
+          <div
+            onMouseDown={this.onMouseDown.bind(this)}
+            className="flexible-modal-drag-area"
+            style={{
+              width: this.state.width
+            }}
+            ref={dragArea => {
+              this.dragArea = dragArea;
+            }}
+          />
+          <div
+            onMouseDown={this.onMouseDown.bind(this)}
+            className="flexible-modal-drag-area-left"
+            style={{
+              height: this.state.height
+            }}
+            ref={dragArea => {
+              this.dragArea2 = dragArea;
+            }}
+          />
+          <div
+            onMouseDown={this.onMouseDown.bind(this)}
+            className="flexible-modal-drag-area-bottom"
+            style={{
+              width: this.state.width
+            }}
+            ref={dragArea => {
+              this.dragArea3 = dragArea;
+            }}
+          />
+          <div
+            onMouseDown={this.onMouseDown.bind(this)}
+            className="flexible-modal-drag-area-right"
+            style={{
+              height: this.state.height
+            }}
+            ref={dragArea => {
+              this.dragArea4 = dragArea;
+            }}
+          />
           {!disableResize &&
             <Resizer updateStateResizing={this.updateStateResizing} />}
         </Modal>
