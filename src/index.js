@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Resizer from "./Resize.js";
 import * as FontAwesome from "react-icons/lib/fa";
+import { CSSTransition } from "react-transition-group";
 
 class Modal extends Component {
   render() {
@@ -17,47 +18,57 @@ class Modal extends Component {
       onRequestRecover
     } = this.props;
     if (isOpen) {
-      // if (!isMinimised) {
-      //   return (
-      //     <div
-      //       ref={node => {
-      //         this.node = node;
-      //       }}
-      //       draggable={isDragging}
-      //       className="flexible-modal"
-      //       style={{ width, height, top, left }}
-      //     >
+      return (
+        <Fragment>
+          <CSSTransition
+            in={!isMinimised}
+            timeout={300}
+            classNames="minimise"
+            unmountOnExit
+          >
+            <div ref={node => {
+                this.node = node;
+              }}
+              draggable={isDragging}
+              className="flexible-modal"
+              style={{ width, height, top, left }}
+            >
+              {this.props.children}
+            </div>
+          </CSSTransition>
+          {isMinimised &&
+            <button
+              className="flexible-modal-rebound-btn"
+              onClick={onRequestRecover}
+            >
+              <FontAwesome.FaBars />
+            </button>}
+        </Fragment>
+      );
+      // return (
+      //   <div
+      //     ref={node => {
+      //       this.node = node;
+      //     }}
+      //     draggable={isDragging}
+      //     style={{ width, height, top, left }}
+      //     className={isMinimised ? "flexible-modal-hidden" : "flexible-modal"}
+      //   >
+      //     <div>
       //       {this.props.children}
       //     </div>
-      //   );
-      // } else {
-      //   return <button className="flexible-modal-rebound-btn" onClick={onRequestRecover}><FontAwesome.FaBars /></button>;
-      // }
-
-      return (
-        <div>
-          <div
-            ref={node => {
-              this.node = node;
-            }}
-            draggable={isDragging}
-            className={isMinimised ? "flexible-modal-hidden" : "flexible-modal"}
-            style={{ width, height, top, left }}
-          >
-            {this.props.children}
-          </div>
-          <button
-            className={
-              isMinimised
-                ? "flexible-modal-rebound-btn"
-                : "flexible-modal-rebound-btn-hidden"
-            }
-            onClick={onRequestRecover}
-          >
-            <FontAwesome.FaBars />
-          </button>
-        </div>
-      );
+      //     <button
+      //       className={
+      //         isMinimised
+      //           ? "flexible-modal-rebound-btn"
+      //           : "flexible-modal-rebound-btn-hidden"
+      //       }
+      //       onClick={onRequestRecover}
+      //     >
+      //       <FontAwesome.FaBars />
+      //     </button>
+      //   </div>
+      // );
     } else {
       return null;
     }
@@ -107,6 +118,8 @@ class FlexibleModal extends Component {
     // only left mouse button
     if (e.button !== 0) return;
     var pos = ReactDOM.findDOMNode(this.node_modal);
+    console.log("1", pos.offsetLeft);
+    console.log("2", pos.offsetTop);
     this.setState({
       isDragging: true,
       rel: {
