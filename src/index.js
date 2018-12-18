@@ -136,7 +136,7 @@ class FlexibleModal extends Component {
     this.setState({ isDragging: false });
     this.setState({ isResizing: false });
     e.stopPropagation();
-    e.preventDefault();
+    // e.preventDefault();
   }
 
   onMouseMove(e) {
