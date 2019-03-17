@@ -1,6 +1,6 @@
 {
   "name": "react-modal-resizable-draggable",
-  "version": "0.1.1-rc.14",
+  "version": "0.1.1-rc.15",
   "description": "This is a modal that support resizalbe and draggable function",
   "repository": {
     "type": "git",
@@ -15,8 +15,7 @@
     "react-dom": "^16.2.0",
     "react-icons": "^2.2.7",
     "react-motion": "^0.5.2",
-    "react-transition-group": "^2.4.0",
-    "webpack": "^3.4.0"
+    "react-transition-group": "^2.4.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -35,6 +34,7 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.5.1",
     "clean-webpack-plugin": "^0.1.19",
-    "css-loader": "^0.28.8"
+    "css-loader": "^0.28.8",
+    "webpack": "^3.4.0"
   }
 }

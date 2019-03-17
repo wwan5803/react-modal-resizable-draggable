@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 var path = require('path');
+
 var devOption = {
     entry: './src/index.js',
     output: {
