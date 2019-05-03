@@ -1,7 +1,7 @@
 # react-modal-resizable-draggable
 
 Accessible modal dialog component for React.JS
-BBBB
+
 # Demo
 * [link to demo](https://wwan5803.github.io/react-modal-resizable-draggable/)
 
