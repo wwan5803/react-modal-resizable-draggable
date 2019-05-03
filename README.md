@@ -1,5 +1,5 @@
 # react-modal-resizable-draggable
-AAAA
+
 Accessible modal dialog component for React.JS
 BBBB
 # Demo
