@@ -78,6 +78,7 @@ class FlexibleModal extends Component {
   }
   
   componentWillUnmount() {
+    const { disableKeystroke } = this.props;
     if(document.removeEventListener){
       document.removeEventListener('mousemove', this.onMouseMove.bind(this));
       document.removeEventListener('mouseup', this.onMouseUp.bind(this));
