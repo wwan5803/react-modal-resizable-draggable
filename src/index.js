@@ -7,17 +7,18 @@ import { CSSTransition } from 'react-transition-group';
 
 class Modal extends Component {
 	render() {
-		const { isDragging, width, height, top, left, isOpen, isMinimised, onRequestRecover } = this.props;
+		const { isDragging, width, height, top, left, isOpen, isMinimised, onRequestRecover,className,onFocus } = this.props;
 		if (isOpen) {
 			return (
 				<Fragment>
 					<CSSTransition in={!isMinimised} timeout={300} classNames="minimise" unmountOnExit>
 						<div
+							onClick={onFocus}
 							ref={(node) => {
 								this.node = node;
 							}}
 							draggable={isDragging}
-							className="flexible-modal"
+							className={!className?"flexible-modal":"flexible-modal "+className}
 							style={{ width, height, top, left }}
 						>
 							{this.props.children}
@@ -210,7 +211,7 @@ class FlexibleModal extends Component {
 	}
 
 	render() {
-		const { isOpen, isMinimised, onRequestClose, onRequestMinimise, onRequestRecover, disableResize } = this.props;
+		const { isOpen, isMinimised, onRequestClose, onRequestMinimise, onRequestRecover, disableResize,className,onFocus } = this.props;
 		return (
 			<div>
 				{/*this mask is a must*/}
@@ -222,6 +223,8 @@ class FlexibleModal extends Component {
 					/>
 				)}
 				<Modal
+					className = {className}
+					onFocus={onFocus}
 					width={this.state.width}
 					height={this.state.height}
 					top={this.state.top}
