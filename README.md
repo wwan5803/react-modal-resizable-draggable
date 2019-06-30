@@ -89,6 +89,8 @@ Optional prop:
 - `disableHorizontalResize` to disable the horizontal resize function(default false).
 - `disableVerticalMove` to disable the vertical drop function(default false).
 - `disableHorizontalMove` to disable the horizontal drop function(default false).
+- `onFocus` called when the modal is clicked.
+- `className` The additional class to the modal.
 
 
 Example:
@@ -97,6 +99,8 @@ Example:
 <Modal
   isOpen={bool}
   onRequestClose={this.closeModal}
+  onFocus={() => console.log("Modal is clicked")}
+  className={"my-modal-custom-class"}
   initWidth={800} 
   initHeight={400}
 >
@@ -145,7 +149,11 @@ class App extends Component {
                 >
                     Open modal
                 </button>
-                <ReactModal initWidth={800} initHeight={400} onRequestClose={this.closeModal} isOpen={this.state.modalIsOpen}>
+                <ReactModal initWidth={800} initHeight={400} 
+                onFocus={() => console.log("Modal is clicked")}
+                className={"my-modal-custom-class"}
+                onRequestClose={this.closeModal} 
+                isOpen={this.state.modalIsOpen}>
                     <h3>My Modal</h3>
                     <div className="body">
                         <p>This is the modal&apos;s body.</p>
