@@ -70,18 +70,17 @@ class FlexibleModal extends Component {
 	}
 
 	componentDidMount() {
-    const { disableKeystroke } = this.props;
-		document.addEventListener('mousemove', this.onMouseMove);
+    	const { disableKeystroke } = this.props;
 		document.addEventListener('mouseup', this.onMouseUp);
 		if(!disableKeystroke) document.addEventListener('keydown', this.pressKey);
 	}
 
-	componentDidUpdate(props, state) {
-		if (!this.state.isDragging && state.isDragging) {
-			document.removeEventListener('mousemove', this.onMouseMove);
-			document.removeEventListener('mouseup', this.onMouseUp);
-		}
-  	}
+	// componentDidUpdate(props, state) {
+	// 	if (!this.state.isDragging && state.isDragging) {
+	// 		document.removeEventListener('mousemove', this.onMouseMove);
+	// 		document.removeEventListener('mouseup', this.onMouseUp);
+	// 	}
+  	// }
   
 	componentWillUnmount() {
 		const { disableKeystroke } = this.props;
@@ -94,6 +93,7 @@ class FlexibleModal extends Component {
 
 	onMouseDown(e) {
 		// only left mouse button
+		document.addEventListener('mousemove', this.onMouseMove);
 		if (e.button !== 0) return;
 		var pos = ReactDOM.findDOMNode(this.node_modal);
 		this.setState({
@@ -144,6 +144,7 @@ class FlexibleModal extends Component {
 	}
 
 	updateStateResizing(isResizing) {
+		document.addEventListener('mousemove', this.onMouseMove);
 		this.setState({ isResizing });
 	}
 

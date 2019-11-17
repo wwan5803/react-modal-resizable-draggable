@@ -5,7 +5,7 @@ class Resizer extends React.Component {
   constructor(props) {
     super(props);
   }
-  onMouseDown(e) {
+  handleMouseDown(e) {
     this.props.updateStateResizing(true);
   }
   render() {
@@ -17,7 +17,7 @@ class Resizer extends React.Component {
       <div
         className="flexible-modal-resizer"
         style={style}
-        onMouseDown={this.onMouseDown.bind(this)}
+        onMouseDown={this.handleMouseDown.bind(this)}
       />
     );
   }
