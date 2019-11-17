@@ -60,32 +60,37 @@ class FlexibleModal extends Component {
 			rel: null
 		};
 		this.updateStateResizing = this.updateStateResizing.bind(this);
-    this.funcResizing = this.funcResizing.bind(this);
-    this.resize = this.resize.bind(this);
+		this.funcResizing = this.funcResizing.bind(this);
+		this.resize = this.resize.bind(this);
+		this.onMouseMove = this.onMouseMove.bind(this);
+		this.onMouseUp = this.onMouseUp.bind(this);
+		this.onMouseDown = this.onMouseDown.bind(this);
+		this.pressKey = this.pressKey.bind(this);
+		this.updateStateDragging = this.updateStateDragging.bind(this);
 	}
 
 	componentDidMount() {
     const { disableKeystroke } = this.props;
-		document.addEventListener('mousemove', this.onMouseMove.bind(this));
-		document.addEventListener('mouseup', this.onMouseUp.bind(this));
-		if(!disableKeystroke) document.addEventListener('keydown', this.pressKey.bind(this));
+		document.addEventListener('mousemove', this.onMouseMove);
+		document.addEventListener('mouseup', this.onMouseUp);
+		if(!disableKeystroke) document.addEventListener('keydown', this.pressKey);
 	}
 
 	componentDidUpdate(props, state) {
 		if (!this.state.isDragging && state.isDragging) {
-			document.removeEventListener('mousemove', this.onMouseMove.bind(this));
-			document.removeEventListener('mouseup', this.onMouseUp.bind(this));
+			document.removeEventListener('mousemove', this.onMouseMove);
+			document.removeEventListener('mouseup', this.onMouseUp);
 		}
-  }
+  	}
   
-  componentWillUnmount() {
-    const { disableKeystroke } = this.props;
-    if(document.removeEventListener){
-      document.removeEventListener('mousemove', this.onMouseMove.bind(this));
-      document.removeEventListener('mouseup', this.onMouseUp.bind(this));
-      if(!disableKeystroke) document.removeEventListener('keydown', this.pressKey.bind(this));
-    }
-  }
+	componentWillUnmount() {
+		const { disableKeystroke } = this.props;
+		if(document.removeEventListener){
+		document.removeEventListener('mousemove', this.onMouseMove);
+		document.removeEventListener('mouseup', this.onMouseUp);
+		if(!disableKeystroke) document.removeEventListener('keydown', this.pressKey);
+		}
+	}
 
 	onMouseDown(e) {
 		// only left mouse button
@@ -103,7 +108,7 @@ class FlexibleModal extends Component {
 	}
 
 	onMouseUp(e) {
-		document.removeEventListener('mousemove', this.onMouseMove.bind(this));
+		document.removeEventListener('mousemove', this.onMouseMove);
 		this.setState({ isDragging: false });
 		this.setState({ isResizing: false });
 		e.stopPropagation();
@@ -234,7 +239,7 @@ class FlexibleModal extends Component {
 					onRequestRecover={onRequestRecover}
 					isMinimised={isMinimised}
 					isOpen={isOpen}
-					updateStateDragging={this.updateStateDragging.bind(this)}
+					updateStateDragging={this.updateStateDragging}
 					transitionName="modal-anim"
 					ref={(node) => {
 						this.node_modal = node;
@@ -242,7 +247,7 @@ class FlexibleModal extends Component {
 				>
 					{this.props.children}
 					<div
-						onMouseDown={this.onMouseDown.bind(this)}
+						onMouseDown={this.onMouseDown}
 						className="flexible-modal-drag-area"
 						style={{
 							width: this.state.width
@@ -252,7 +257,7 @@ class FlexibleModal extends Component {
 						}}
 					/>
 					<div
-						onMouseDown={this.onMouseDown.bind(this)}
+						onMouseDown={this.onMouseDown}
 						className="flexible-modal-drag-area-left"
 						style={{
 							height: this.state.height
@@ -262,7 +267,7 @@ class FlexibleModal extends Component {
 						}}
 					/>
 					<div
-						onMouseDown={this.onMouseDown.bind(this)}
+						onMouseDown={this.onMouseDown}
 						className="flexible-modal-drag-area-bottom"
 						style={{
 							width: this.state.width
@@ -272,7 +277,7 @@ class FlexibleModal extends Component {
 						}}
 					/>
 					<div
-						onMouseDown={this.onMouseDown.bind(this)}
+						onMouseDown={this.onMouseDown}
 						className="flexible-modal-drag-area-right"
 						style={{
 							height: this.state.height
