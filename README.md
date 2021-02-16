@@ -89,6 +89,7 @@ Optional prop:
 - `disableHorizontalResize` to disable the horizontal resize function(default false).
 - `disableVerticalMove` to disable the vertical drop function(default false).
 - `disableHorizontalMove` to disable the horizontal drop function(default false).
+- `disableKeystroke` to disable keystroke listener(default false).
 - `onFocus` called when the modal is clicked.
 - `className` The additional class to the modal.
 
