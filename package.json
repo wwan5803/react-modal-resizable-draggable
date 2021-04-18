@@ -9,14 +9,14 @@
   "license": "MIT",
   "main": "build/main.js",
   "peerDependencies": {
-    "react": "^17.0.1"
+    "react": "^15.5.4"
   },
   "dependencies": {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.1",
-    "react-icons": "^4.2.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-icons": "^2.2.7",
     "react-motion": "^0.5.2",
-    "react-transition-group": "^4.4.1"
+    "react-transition-group": "^2.4.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -28,17 +28,14 @@
     "email": "wesleywang5803@gmail.com"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.17",
-    "@babel/core": "^7.12.17",
-    "@babel/plugin-proposal-object-rest-spread": "^7.12.13",
-    "@babel/plugin-transform-destructuring": "^7.12.13",
-    "@babel/preset-env": "^7.12.17",
-    "@babel/preset-react": "^7.12.13",
-    "babel-loader": "^8.2.2",
-    "babel-preset-env": "^1.7.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^5.0.2",
-    "webpack": "^5.23.0",
-    "webpack-cli": "^4.5.0"
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.8",
+    "webpack": "^3.4.0"
   }
 }
