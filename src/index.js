@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Resizer from './Resize.js';
-import * as FontAwesome from 'react-icons/lib/fa';
+import { FaBars } from 'react-icons/fa';
 import { CSSTransition } from 'react-transition-group';
 
 class Modal extends Component {
@@ -26,7 +26,7 @@ class Modal extends Component {
 					</CSSTransition>
 					{isMinimised && (
 						<button className="flexible-modal-rebound-btn" onClick={onRequestRecover}>
-							<FontAwesome.FaBars />
+							<FaBars />
 						</button>
 					)}
 				</Fragment>
@@ -81,7 +81,7 @@ class FlexibleModal extends Component {
 	// 		document.removeEventListener('mouseup', this.onMouseUp);
 	// 	}
   	// }
-  
+
 	componentWillUnmount() {
 		const { disableKeystroke } = this.props;
 		if(document.removeEventListener){
