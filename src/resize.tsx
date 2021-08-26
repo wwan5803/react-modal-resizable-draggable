@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "./index.css";
 
-class Resizer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  handleMouseDown(e) {
+interface PropTypes {
+  updateStateResizing: (v: boolean) => void;
+}
+
+class Resizer extends React.Component<PropTypes> {
+  handleMouseDown() {
     this.props.updateStateResizing(true);
   }
   render() {

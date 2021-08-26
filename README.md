@@ -94,23 +94,6 @@ Optional prop:
 - `className` The additional class to the modal.
 
 
-Example:
-
-```jsx
-<Modal
-  isOpen={bool}
-  onRequestClose={this.closeModal}
-  onFocus={() => console.log("Modal is clicked")}
-  className={"my-modal-custom-class"}
-  initWidth={800} 
-  initHeight={400}
->
-  <h1>Modal Content</h1>
-  <p>Etc.</p>
-</Modal>
-```
-
-
 ## Examples
 
 Inside an app:
@@ -145,23 +128,21 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <button
-                    onClick={this.openModal}
-                >
+                <button onClick={this.openModal}>
                     Open modal
                 </button>
-                <ReactModal initWidth={800} initHeight={400} 
-                onFocus={() => console.log("Modal is clicked")}
-                className={"my-modal-custom-class"}
-                onRequestClose={this.closeModal} 
-                isOpen={this.state.modalIsOpen}>
+                <ReactModal 
+                    initWidth={800} 
+                    initHeight={400} 
+                    onFocus={() => console.log("Modal is clicked")}
+                    className={"my-modal-custom-class"}
+                    onRequestClose={this.closeModal} 
+                    isOpen={this.state.modalIsOpen}>
                     <h3>My Modal</h3>
                     <div className="body">
                         <p>This is the modal&apos;s body.</p>
                     </div>
-                    <button
-                        onClick={this.closeModal}
-                    >
+                    <button onClick={this.closeModal}>
                         Close modal
                     </button>
                 </ReactModal>

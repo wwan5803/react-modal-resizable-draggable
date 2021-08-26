@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+		"jsx": "react-jsx",
+        "target": "ES2015",
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "strictNullChecks": false,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "declaration": true,
+        "outDir": "./lib",
+        "strict": true,
+        "noImplicitAny": false,
+        "baseUrl": "src",
+    },
+}
