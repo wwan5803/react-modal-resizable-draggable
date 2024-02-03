@@ -5,26 +5,27 @@ import Resizer from './resize';
 import Modal from './model';
 
 interface PropTypes {
-	top?: number;
-	left?: number;
-	initHeight?: number;
-	initWidth?: number;
-	minWidth?: number;
-	minHeight?: number;
-	isOpen: boolean;
-	className?: string;
-	disableMove?: boolean;
-	disableVerticalMove?: boolean;
-	disableHorizontalMove?: boolean;
-	isMinimised?: boolean;
-	disableResize?: boolean;
-	disableKeystroke?: boolean;
-	disableVerticalResize?: boolean;
-	disableHorizontalResize?: boolean;
-	onRequestClose: () => void;
-	onRequestMinimise?: () => void;
-	onRequestRecover?: () => void;
-	onFocus?: () => void;
+  children: React.JSX.Element[];
+  top?: number;
+  left?: number;
+  initHeight?: number;
+  initWidth?: number;
+  minWidth?: number;
+  minHeight?: number;
+  isOpen: boolean;
+  className?: string;
+  disableMove?: boolean;
+  disableVerticalMove?: boolean;
+  disableHorizontalMove?: boolean;
+  isMinimised?: boolean;
+  disableResize?: boolean;
+  disableKeystroke?: boolean;
+  disableVerticalResize?: boolean;
+  disableHorizontalResize?: boolean;
+  onRequestClose?: () => void;
+  onRequestMinimise?: () => void;
+  onRequestRecover?: () => void;
+  onFocus?: () => void;
 }
 
 
