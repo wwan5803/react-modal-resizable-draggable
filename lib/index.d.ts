@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './index.css';
 import Modal from './model';
 interface PropTypes {
+    children: React.JSX.Element[];
     top?: number;
     left?: number;
     initHeight?: number;
@@ -18,7 +19,7 @@ interface PropTypes {
     disableKeystroke?: boolean;
     disableVerticalResize?: boolean;
     disableHorizontalResize?: boolean;
-    onRequestClose: () => void;
+    onRequestClose?: () => void;
     onRequestMinimise?: () => void;
     onRequestRecover?: () => void;
     onFocus?: () => void;
